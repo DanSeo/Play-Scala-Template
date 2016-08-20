@@ -16,6 +16,8 @@ Controllers
 
   Shows how to use scalikejdbc.
 
+  Shows how to use Redis client( https://github.com/debasishg/scala-redis )
+
 - AsyncController.scala:
 
   Shows how to do asynchronous programming when handling a request.
@@ -54,5 +56,5 @@ Filters
 
 
 * Plan
-  + Consider to apply Redis Client https://github.com/debasishg/scala-redis or https://github.com/debasishg/scala-redis
-  + Consider to apply elasticsearch client ( http://www.lightbend.com/activator/template/play-scala-rest-elasticsearch , https://github.com/evojam/play-elastic-template#master )
+  + Consider to apply elasticsearch client ( https://github.com/evojam/play-elastic4s
+  http://www.lightbend.com/activator/template/play-scala-rest-elasticsearch )

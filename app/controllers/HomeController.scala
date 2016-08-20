@@ -1,16 +1,18 @@
 package controllers
 
 import javax.inject._
+
 import play.api._
 import play.api.mvc._
 import scalikejdbc._
+import storage.RedisStorage
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class HomeController @Inject() extends Controller {
+class HomeController @Inject() (redisStorage: RedisStorage) extends Controller {
   implicit val session = AutoSession
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -27,7 +29,13 @@ class HomeController @Inject() extends Controller {
 
     playProject.foreach { s =>
       Logger.info(s"id:${s._1},name:${s._2},version:${s._3}")
+
+      if (redisStorage.set(s._2, s._3) ){
+        Logger.info(s"redis cachced set : ${redisStorage.get(s._2).getOrElse("1.0.0")}")
+      }
+
     }
+
 
     Ok("Ok")
   }

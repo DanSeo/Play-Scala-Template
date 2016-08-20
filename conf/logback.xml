@@ -24,6 +24,15 @@
     <appender-ref ref="STDOUT" />
   </appender>
 
+  <appender name="LogstashAppender" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <!-- ip port는 default라 설정 안해도 되지만 명시적으로 설정함 -->
+    <remoteHost>127.0.0.1</remoteHost>
+    <port>4560</port>
+    <!-- encoder is required -->
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+  </appender>
+
+
   <logger name="play" level="INFO" />
   <logger name="application" level="DEBUG" />
 
@@ -32,6 +41,10 @@
   <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
   <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
+
+  <logger name="LOGSTASH" level="info" additivity="false">
+    <appender-ref ref="LogstashAppender"/>
+  </logger>
 
   <root level="WARN">
     <appender-ref ref="ASYNCFILE" />
